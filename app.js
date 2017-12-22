@@ -18,50 +18,43 @@ app.use(function(req, res, next){
 	res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
 	next();
 });
-app.use(bodyParser.urlencoded());
-app.use(flash());
-//set static path
-app.use(cookieParser());
 app.use(session({ secret : 'tss'}));
-
-
+app.use(cookieParser());
 app.use(function(req, res, next){
 	res.locals.session=req.session;
 	next();
 });
-
-
+app.use(bodyParser());
+// app.use(bodyParser.urlencoded());
+// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(flash());
 app.use(require('./controllers/router'));
+//set static path
+
+
+
+
+
+
 app.use(express.static(__dirname+'/public'));
+
+
+
+
+
 
 // req.session.name="james";
 //
 app.set('views',__dirname+'/views');
 app.set('view engine','ejs');
-
-app.get('/angular', function(req, res){
-	res.sendFile(__dirname+'/views/angular/index.html')
-	console.log("CALLING");
-});
-
-
-var MongoClient=require('mongodb').MongoClient;
-var dburl="mongodb://localhost:27017/tss";
+app.post('/student', function(req, res){
+	console.log(req.body);
+})
 
 
 
 
 
-
-app.get('/getData', function(req, res){
-	
-	MongoClient.connect(dburl, function(err, db){
-		db.collection('student').find().toArray(function(err, doc){
-
-				res.send(doc);
-		});
-	});
-});
 
 
 //set view folder

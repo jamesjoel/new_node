@@ -24,10 +24,13 @@ router.get('/', function(req, res){
 // router.post('/login', function(req, res){
 // 	console.log('post calling');
 // })
-router.all('/user', require('../controllers/user'));
-router.all('/login', require('../controllers/login'));
-router.all('/signup', require('../controllers/signup'));
-router.all('/upload', require('../controllers/upload'));
+router.use('/user', require('../controllers/user'));
+router.use('/login', require('../controllers/login'));
+router.use('/signup', require('../controllers/signup'));
+router.use('/upload', require('../controllers/upload'));
+router.use('/student', require('../controllers/student'));
+
+
 // router.get('/about', require('../controllers/about'));
 
 router.get('/logout', function(req, res){

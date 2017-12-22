@@ -7,6 +7,12 @@ router.get('/login', function(req, res){
 	res.render('layout', pageData);
 });
 
+
+router.get('/login/test', function(req, res){
+	console.log("hello");
+	res.send("hello world");
+})
+
 router.post('/login', function(req, res){
 	user.getWhereOne({ email : req.body.email }, function(err, doc){
 		if(err){

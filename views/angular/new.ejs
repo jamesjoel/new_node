@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="myApp">
 <head>
-	<title></title>
+	<title>New Page</title>
 	<link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
 	<script type="text/javascript" src="/js/jquery.min.js"></script>
 	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
@@ -23,6 +23,11 @@
   </div>
 </nav>
 <hr />
+<form action="student/savedata" method="post">
+	<input type="text" name="name">
+	<Br />
+	<input type="button" ng-click="test()">
+</form>
 
 <div class="container">
 	<div class="well">
