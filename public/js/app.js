@@ -28,5 +28,30 @@ app.controller("myCtrl", function($scope, $http){
 		});
 	}
 
+	$scope.ask_delete=function(obj){
+		$scope.selectedObj=obj;
+	}
+	$scope.conf_delete=function(){
+		// console.log($scope.selectedObj);
+		$http({
+			method : "POST",
+			url : '/student/deleteData',
+			data : $scope.selectedObj
+		}).then(function(res){
+			console.log(res.data.data.value, '-----------');
+			console.log($scope.allData, '-----------');
+			// $scope.allData.splice(res.data.data.value, 1);
+			// var index=$scope.allData.indexOf(res.data.data.value);
+			// console.log(index);
+			for(var i=0; i<$scope.allData.length; i++)
+			{
+				if($scope.allData[i]._id == res.data.data.value._id)
+				{
+					$scope.allData.splice(i, 1);
+				}
+			}
+		});
+	}
+
 
 });

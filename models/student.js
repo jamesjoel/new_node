@@ -1,3 +1,4 @@
+var MongoDB=require('mongodb');
 var con=require('../config/connection');
 
 module.exports.insert=function(data, callback){
@@ -26,5 +27,16 @@ module.exports.getAll=function(callback){
 			return;
 		}
 		db.collection('student').find().toArray(callback);
+	})	
+}
+
+module.exports.remove=function(where, callback){
+	con.init(function(err, db){
+		if(err){
+			console.log('Connection Error', err);
+			return;
+		}
+		var obj = { _id : new MongoDB.ObjectID(where._id) };
+		db.collection('student').findOneAndDelete(obj, callback);
 	})	
 }

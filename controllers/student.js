@@ -7,8 +7,7 @@ var Student=require('../models/student');
 
 router.get('/', function(req, res){
 	res.sendFile(path.resolve('views/angular/index.html'));
-	// res.render('angular/new');
-	// res.send("hello");
+	
 });
 router.get('/getdata', function(req, res){
 	
@@ -18,7 +17,6 @@ router.get('/getdata', function(req, res){
 		res.send({ data : doc });
 	})
 });
-
 
 router.post('/savedata', function(req, res){
 	Student.insert(req.body, function(err, doc){
@@ -32,7 +30,18 @@ router.post('/savedata', function(req, res){
 });
 router.post('/student', function(req, res){
 	console.log(req.body);
-})
+});
+router.post('/deleteData', function(req, res){
+	console.log(req.body);
+	Student.remove(req.body, function(err, result){
+		if(err){
+			console.log('error while deleting', err);
+			return;
+		}
+		console.log("success",result);
+		res.send({ data :result});
+	});
+});
 
 
 module.exports=router;
