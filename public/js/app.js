@@ -6,14 +6,25 @@ app.controller("myCtrl", function($scope, $http){
 
 
 	$scope.save=function(){
-		console.log($scope.newStudent);
+		//console.log($scope.newStudent);
 		$http({
 			method : "POST",
 			url : "/student/savedata",
 			data : $scope.newStudent
 		}).then(function(res){
-			console.log(res);
-			$scope.allData.push(res.data.data);
+			console.log(res.data.data.value);
+			if($scope.newStudent._id){
+				for(var i=0; i<$scope.allData.length; i++)
+				{
+					if($scope.allData[i]._id == res.data.data.value._id)
+					{
+						$scope.allData[i]=res.data.data.value;
+					}
+				}
+			}
+			else{
+				$scope.allData.push(res.data.data);
+			}
 
 		});
 	}
@@ -51,6 +62,11 @@ app.controller("myCtrl", function($scope, $http){
 				}
 			}
 		});
+	}
+
+	$scope.ask_edit=function(obj){
+		//$scope.newStudent=obj;
+		angular.copy(obj, $scope.newStudent);	 // one way binding
 	}
 
 
